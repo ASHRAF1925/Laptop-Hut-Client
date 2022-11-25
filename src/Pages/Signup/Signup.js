@@ -1,42 +1,75 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
+import { Result } from "postcss";
 
 const Signup = () => {
-  // handle form events
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
+    setValue,
   } = useForm({
     mode: "onTouched",
   });
 
-  // handle submit
-  const onSubmit = (data) => alert(JSON.stringify(data));
+  const {createUser}=useContext(AuthContext);
 
-  // handle password eye
+ 
   const [passwordEye, setPasswordEye] = useState(false);
 
   const handlePasswordClick = () => {
     setPasswordEye(!passwordEye);
   };
 
-  // handle confirm password eye
+
   const [confirmPasswordEye, setConfirmPasswordEye] = useState(false);
 
   const handleConfirmPasswordClick = () => {
     setConfirmPasswordEye(!confirmPasswordEye);
   };
   const password = watch("password");
-
+  const imageHostKey = process.env.REACT_APP_imgbb_KEY;
 
 
   const handleSignup = (data) => {
+    const image = data.photo[0];
+
+    const formData = new FormData();
+    formData.append("image", image);
+    console.log(formData);
+    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          console.log(imgData);
+          console.log(imgData.data.url);
+
+        }
+      });
     console.log(data);
+
+    // google sign up using password and email
+
+    createUser(data.email,data.password)
+    .then(result=>{
+        const user= result.user;
+        console.log(user);
+    })
+    .catch(
+        error=>{
+            console.log(error)
+        }
+    )
   };
 
   return (
@@ -78,8 +111,6 @@ const Signup = () => {
           </div>
 
           {/* password  */}
-
-          
 
           <React.Fragment>
             <section>
@@ -172,6 +203,42 @@ const Signup = () => {
                         )}
                       </div>
                     </div>
+
+                    {/* image upload  */}
+
+                    <div className="photo mt-5 ">
+                      <img
+                        src={
+                          watch("photo")
+                            ? URL.createObjectURL(watch("photo")[0])
+                            : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                        }
+                        alt=""
+                        sx={{ width: "200px", height: "200px" }}
+                      />
+                      <label htmlFor="contained-button-file">
+                        <input
+                          className="file-input file-input-bordered w-full max-w-xs mt-4"
+                          accept="image/*"
+                          id="contained-button-file"
+                          type="file"
+                          onChange={(e) => setValue("photo", e.target.files)}
+                          multiple
+                        />
+                      </label>
+                    </div>
+
+                    {/* user type  */}
+                    <label className="label">
+              <span className="label-text">Select The User Type</span>
+            </label>
+
+                    <select className="select select-bordered w-full max-w-xs" {...register("role")}>
+                  
+                      <option value="User">User</option>
+                      <option value="Seller">Seller</option>
+                    
+                    </select>
                   </div>
                 </div>
               </div>
