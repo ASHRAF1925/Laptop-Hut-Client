@@ -36,54 +36,40 @@ const NavBar = () => {
   const navBarItems = (
     <>
       <li>
-
         <NavLink
           className={({ isActive }) => (isActive ? activelink : normallink)}
           to="/"
         >
           Home
         </NavLink>
-        
+
         <NavLink
           className={({ isActive }) => (isActive ? activelink : normallink)}
           to="/login"
         >
           Login
         </NavLink>
-        
-        <NavLink
-          className={({ isActive }) => (isActive ? activelink : normallink)}
-          to="/signup"
-        >
-         Signup
-        </NavLink>
       </li>
 
-      <li>  {/* theme change here */}
-     
-     
-
+      <li>
+        {" "}
+        {/* theme change here */}
         <div className="font-bold bg-gradient-to-r from-indigo-400 via-purple-500 to-indigo-600 Text-gradient rounded-3xl mt-7 h-1/2">
-  <label className="label">
-    <span className="label-text">Select the Theme</span>
-
-  </label>
-  <select data-choose-theme className="select select-bordered select-sm ">
-       
-       
-       {themeValues.map((value) => (
-         <option key={value.toLowerCase()} value={value.toLowerCase()}>
-           {value.toString()}
-         </option>
-       ))}
-     </select>
-
- 
-</div>
-        
-        
-        
-        </li>
+          <label className="label">
+            <span className="label-text">Select the Theme</span>
+          </label>
+          <select
+            data-choose-theme
+            className="select select-bordered select-sm "
+          >
+            {themeValues.map((value) => (
+              <option key={value.toLowerCase()} value={value.toLowerCase()}>
+                {value.toString()}
+              </option>
+            ))}
+          </select>
+        </div>
+      </li>
     </>
   );
 
@@ -92,7 +78,7 @@ const NavBar = () => {
   });
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-secondary mb-10 ">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -125,13 +111,10 @@ const NavBar = () => {
         <ul className="menu menu-horizontal p-0">
           {/* nav items */}
           {navBarItems}
-            {/* theme change here */}
-      
+          {/* theme change here */}
         </ul>
       </div>
-      <div className="navbar-end">
-      
-      </div>
+      <div className="navbar-end"></div>
     </div>
   );
 };
