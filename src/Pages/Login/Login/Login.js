@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
+import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const { signIn,userInfo,SetUserInfo } = useContext(AuthContext);
   const {
     register,
     formState: { errors },
@@ -12,27 +16,62 @@ const Login = () => {
     watch,
   } = useForm();
 
+  const location=useLocation();
+  const navigate=useNavigate();
+  const from=location.state?.from?.pathname || '/';
+
+  const [loginError,setloginError]=useState('');
+
   const handleLogin = (data) => {
+    setloginError('')
+
     console.log(data);
+    signIn(data.email,data.password)
+    .then(result=>{
+        const user=result.user;
+        console.log(user);
+        getUserToken(data.email)
+        
+        navigate(from,{replace:true})
+    })
+    .catch(error=>{
+        console.log(error);
+        setloginError(error.message)
+
+    })
   };
 
-  // handle submit
-  const onSubmit = (data) => alert(JSON.stringify(data));
 
-  // handle password eye
+
+
   const [passwordEye, setPasswordEye] = useState(false);
 
   const handlePasswordClick = () => {
     setPasswordEye(!passwordEye);
   };
 
-  // handle confirm password eye
-  const [confirmPasswordEye, setConfirmPasswordEye] = useState(false);
+// password=Aa1!sd
+//email :test@gmail.com
 
-  const handleConfirmPasswordClick = () => {
-    setConfirmPasswordEye(!confirmPasswordEye);
-  };
-  const password = watch("password");
+const getUserToken=email=>{
+  fetch(`http://localhost:5000/jwt?email=${email}`)
+  .then(res=>res.json())
+  .then(data=>{
+    if(data.accessToken){
+
+      localStorage.setItem('accessToken',data.accessToken);
+
+      toast.success("Login Successful");
+
+
+      navigate('/');
+
+    }
+  })
+}
+
+
+ 
 
   return (
     <div className=" h-[500px] flex justify-center items-center container mx-auto  ">
@@ -74,8 +113,8 @@ const Login = () => {
                     "Password should include at least one uppercase, one numeric value and one special character",
                 },
                 minLength: {
-                  value: 8,
-                  message: "Minimum Required length is 8",
+                  value: 6,
+                  message: "Minimum Required length is 6",
                 },
                 maxLength: {
                   value: 20,
@@ -117,7 +156,7 @@ const Login = () => {
           </Link>{" "}
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline w-full">Continue With GOOGLE</button>
+        <SocialLogin></SocialLogin>
       </div>
     </div>
   );

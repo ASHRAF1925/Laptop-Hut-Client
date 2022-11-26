@@ -1,13 +1,17 @@
 import React, { useContext, useRef, useState } from "react";
 
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
-import { Result } from "postcss";
+
+import toast from "react-hot-toast";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
+import { useQuery } from "@tanstack/react-query";
+
+
 
 const Signup = () => {
-
   const {
     register,
     handleSubmit,
@@ -18,31 +22,44 @@ const Signup = () => {
     mode: "onTouched",
   });
 
-  const {createUser}=useContext(AuthContext);
+  const { createUseremail, updateuserInfo,userInfo,SetUserInfo} = useContext(AuthContext);
 
- 
   const [passwordEye, setPasswordEye] = useState(false);
+  const [signupError, setsignupError] = useState("");
+  const [confirmPasswordEye, setConfirmPasswordEye] = useState(false);
+
+  const password = watch("password");
+  const imageHostKey = process.env.REACT_APP_imgbb_KEY;
+  const navigate=useNavigate();
+
+
+  const {data,isLoading}=useQuery({
+    queryKey:['user'],
+    queryFn:()=>fetch(`http://localhost:5000/user/1925ashraf@gmail.com`)
+    .then(res=>res.json())
+
+  });
 
   const handlePasswordClick = () => {
     setPasswordEye(!passwordEye);
   };
 
-
-  const [confirmPasswordEye, setConfirmPasswordEye] = useState(false);
-
   const handleConfirmPasswordClick = () => {
     setConfirmPasswordEye(!confirmPasswordEye);
   };
-  const password = watch("password");
-  const imageHostKey = process.env.REACT_APP_imgbb_KEY;
 
-
+  // function for handling email password signup
   const handleSignup = (data) => {
+
+
+    setsignupError("");
+
+
     const image = data.photo[0];
 
     const formData = new FormData();
     formData.append("image", image);
-    console.log(formData);
+ 
     const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
     fetch(url, {
       method: "POST",
@@ -52,25 +69,94 @@ const Signup = () => {
       .then((imgData) => {
         if (imgData.success) {
           console.log(imgData);
-          console.log(imgData.data.url);
 
+          // google sign up using password and email
+
+          createUseremail(data.email, data.password)
+            .then((result) => {
+              const user = result.user;
+
+              handleupdateProfile(data.name, imgData.data.url);
+              saveUser(data.name,data.email,imgData.data.url,data.role,false);
+              toast("User Created Succesfully");
+
+              console.log(user);
+            })
+            .catch((error) => {
+              setsignupError(error);
+              toast.error("what a msitak");
+              console.log(error);
+            });
+          
         }
       });
-    console.log(data);
 
-    // google sign up using password and email
-
-    createUser(data.email,data.password)
-    .then(result=>{
-        const user= result.user;
-        console.log(user);
-    })
-    .catch(
-        error=>{
-            console.log(error)
-        }
-    )
+// function for updating user information
+    const handleupdateProfile = (name, photourl) => {
+      console.log(photourl);
+      const profile = {
+        displayName: name,
+        photoURL: photourl,
+      };
+      console.log("find in", profile.displayName);
+      updateuserInfo(profile)
+        .then(() => {
+          console.log("updated");
+          
+        })
+        .catch((error) => {
+          console.log("update error", error);
+        });
+    };
   };
+
+  // function for inserting user in database
+
+  const saveUser=(name,email,photoURL,role,isverified)=>{
+
+    const newUser={
+      name,email,photoURL,role,isverified
+
+    }
+    console.log("from save post",newUser)
+    fetch(`http://localhost:5000/user?email=${email}`,{
+      method:"PUT",
+      headers:{
+        'content-type':'application/json'
+      },
+      body:JSON.stringify(newUser)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data);
+      getUserToken(email)
+      
+    })
+
+  }
+
+  const getUserToken=email=>{
+    fetch(`http://localhost:5000/jwt?email=${email}`)
+    .then(res=>res.json())
+    .then(data=>{
+      if(data.accessToken){
+
+        localStorage.setItem('accessToken',data.accessToken);
+
+        toast.success("Sign Up Successful!")
+
+
+
+        navigate('/');
+
+      }
+    })
+  }
+
+
+
+  
+
 
   return (
     <div className=" flex justify-center items-center container mx-auto  ">
@@ -230,14 +316,15 @@ const Signup = () => {
 
                     {/* user type  */}
                     <label className="label">
-              <span className="label-text">Select The User Type</span>
-            </label>
+                      <span className="label-text">Select The User Type</span>
+                    </label>
 
-                    <select className="select select-bordered w-full max-w-xs" {...register("role")}>
-                  
+                    <select
+                      className="select select-bordered w-full max-w-xs"
+                      {...register("role")}
+                    >
                       <option value="User">User</option>
                       <option value="Seller">Seller</option>
-                    
                     </select>
                   </div>
                 </div>
@@ -260,7 +347,7 @@ const Signup = () => {
           </Link>{" "}
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline w-full">Continue With GOOGLE</button>
+        <SocialLogin></SocialLogin>
       </div>
     </div>
   );

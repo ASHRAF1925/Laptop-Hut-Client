@@ -3,6 +3,7 @@ import Switch from "react-switch";
 import { useEffect } from "react";
 import { themeChange } from "theme-change";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 
 const NavBar = () => {
   const themeValues = [
@@ -33,6 +34,18 @@ const NavBar = () => {
     "text-xl font-bold bg-gradient-to-r from-indigo-400 via-purple-500 to-indigo-600 Text-gradient text-white rounded-3xl h-1/2  ";
   const normallink = "text-xl my-3 font-semibold";
 
+  const { user, logout } = useContext(AuthContext);
+
+  console.log(user);
+
+  const handleLogout = () => {
+    logout()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const navBarItems = (
     <>
       <li>
@@ -43,12 +56,24 @@ const NavBar = () => {
           Home
         </NavLink>
 
-        <NavLink
-          className={({ isActive }) => (isActive ? activelink : normallink)}
-          to="/login"
-        >
-          Login
-        </NavLink>
+        {user?.uid ? (
+          <>
+            <NavLink
+              className={({ isActive }) => (isActive ? activelink : normallink)}
+              to="/dashboard"
+            >
+              Dashboard
+            </NavLink>
+            <button onClick={handleLogout}>Sign Out</button>
+          </>
+        ) : (
+          <NavLink
+            className={({ isActive }) => (isActive ? activelink : normallink)}
+            to="/login"
+          >
+            Login
+          </NavLink>
+        )}
       </li>
 
       <li>
@@ -114,7 +139,44 @@ const NavBar = () => {
           {/* theme change here */}
         </ul>
       </div>
-      <div className="navbar-end"></div>
+
+      <div className="navbar-end">
+        {user?.uid && (
+         <div>
+           <div className="avatar">
+            {" "}
+            <div className="w-24 rounded-full">
+              <img src={user?.photoURL} alt="" />
+            </div>{" "}
+            
+         
+           
+          </div>
+          <p className="text-acceent font-bold text-xl">{user.displayName}</p>
+
+         </div>
+        )}
+        <label
+          htmlFor="dashboard-drawer"
+          tabIndex={2}
+          className="btn btn-ghost lg:hidden mx-6"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h8m-8 6h16"
+            />
+          </svg>
+        </label>
+      </div>
     </div>
   );
 };
