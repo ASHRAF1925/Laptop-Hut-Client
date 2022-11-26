@@ -49,14 +49,14 @@ const DashboardLayout = () => {
       }
       {isAdmin && (
         <>
-         <li>
-         <h1 className="btn btn-primary" onClick={loadAllUsers}>
-            hello Admin
-          </h1>
-         </li>
+       
          <li>
           <Link className="btn btn-secondary mt-6" to='/dashboard/admin/allsellers'>All Sellers</Link>
          </li>
+         <li>
+          <Link className="btn btn-secondary mt-6" to='/dashboard/admin/allbuyers'>All Buyers</Link>
+         </li>
+
         
         </>
       )}
