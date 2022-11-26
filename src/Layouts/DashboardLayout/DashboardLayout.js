@@ -40,6 +40,7 @@ const DashboardLayout = () => {
           <>
           <h1>Welecome to Seller Dash Board</h1>
           <Link className="btn btn-primary" to='/dashboard/seller/addProducts'>Add a Product</Link>
+          <Link className="btn btn-primary mt-10" to='/dashboard/seller/myproducts'>My Products</Link>
 
 
           
@@ -54,8 +55,9 @@ const DashboardLayout = () => {
           </h1>
          </li>
          <li>
-          <Link to='/dashboard/seller/addProducts'>Add a Product </Link>
+          <Link className="btn btn-secondary mt-6" to='/dashboard/admin/allsellers'>All Sellers</Link>
          </li>
+        
         </>
       )}
     </>
