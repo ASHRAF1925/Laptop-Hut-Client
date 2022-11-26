@@ -7,11 +7,15 @@ import AllSellers from "../../Pages/AllSellers/AllSellers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login/Login";
+import MyOrder from "../../Pages/My Buyers/My Orders/MyOrder";
+import MyBuyers from "../../Pages/My Buyers/MyBuyers";
 import MyProducts from "../../Pages/My Products/MyProducts";
 import Signup from "../../Pages/Signup/Signup";
+import ReporteItems from "../../ReporteItems/ReporteItems";
 import AdminRoute from "../AdminRoute/AdiminRoute";
 import PrivateRoute from "../Private Routes/PrivateRoute";
 import SellerRoute from "../SellerRoutes/SellerRoutes";
+import UserRoute from "../UserRoutes/UserRoutes";
 
 const router = createBrowserRouter([
   {
@@ -58,7 +62,18 @@ const router = createBrowserRouter([
         path: "/dashboard/admin/allbuyers",
         element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>,
       },
-      
+      {
+        path: "/dashboard/admin/reportedItems",
+        element: <AdminRoute><ReporteItems></ReporteItems></AdminRoute>,
+      },
+      {
+        path:"/dashboard/seller/mybuyers",
+        element:<SellerRoute><MyBuyers></MyBuyers></SellerRoute>
+      },
+      {
+        path:"/dashboard/User/myorders",
+        element:<UserRoute><MyOrder></MyOrder></UserRoute>
+      }
     ],
   },
 ]);
