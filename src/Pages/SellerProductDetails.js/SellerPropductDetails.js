@@ -24,13 +24,42 @@ const handleDeleteProduct=(product)=>{
     })
 }
 
+const handleAdvertise=(product)=>{
+    product.isAdvertized=true
+
+    fetch(`http://localhost:5000/seller/advertise`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`
+        },
+        body: JSON.stringify(product),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          refatching();
+         
+          toast.success("Successfully Added for Advertisement");
+          
+          
+        });
+
+        console.log(product)
+
+    
+}
+
 
     return (
         <div>
            <h1> This is seller Product Details{product.name};</h1>
            <h1>Product id {product._id}</h1>
            {
-            !product?.issold &&  <button className='btn btn-secondary'>Advertise</button>
+            !product?.issold &&   
+            product?.isAdvertized ?<button disabled  onClick={()=>handleAdvertise(product)} className='btn btn-secondary'>Advertise</button>:
+            <button onClick={()=>handleAdvertise(product)} className='btn btn-secondary'>Advertise</button>
+            
            }
 
             <button onClick={()=>handleDeleteProduct(product)} className='btn btn-danger'>Delete</button>

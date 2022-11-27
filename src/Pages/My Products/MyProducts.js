@@ -26,6 +26,10 @@ const MyProducts = () => {
     },
   });
 
+ 
+
+
+
   const refatching=()=>{
     refetch();
   }
@@ -41,12 +45,20 @@ const MyProducts = () => {
       <h1>My products</h1>
     
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
-      {products.map((product) => (
-        <SellerPropductDetails key={product._id} product={product} refatching={refatching}>
-        </SellerPropductDetails>
-        
-        
-      ))}
+        {
+          products.length>0 ? products.map((product) => (
+            <SellerPropductDetails key={product._id} product={product} refatching={refatching}>
+            </SellerPropductDetails> 
+            
+            
+          ))
+          :
+          <h1>No Product Available</h1>
+
+          
+          
+        }
+     
     </div>
     </div>
   );

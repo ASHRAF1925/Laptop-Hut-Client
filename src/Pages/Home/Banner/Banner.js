@@ -14,7 +14,7 @@ const Banner = () => {
               <img className="w-3/4" src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" />
             </figure>
             <div className="card-body">
-            <div className="my-auto mx-auto">
+            <div className="my-auto    ">
                <h1 className="text-3xl font-bold text-center">Choose Your Favourite Laptop</h1>
                 <p className="mt-5 text-xl">We offer best laptop at Affortable Prices</p>
                 <Link className="text-center mx-32 mt-10  btn btn-primary " to='/aboutus'>See More</Link>
@@ -38,7 +38,7 @@ const Banner = () => {
               <img className="w-3/4"  src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" alt="Album" />
             </figure>
             <div className="card-body">
-            <div className="my-auto mx-auto">
+            <div className="my-auto    ">
                <h1 className="text-3xl font-bold text-center">Choose Your Favourite Laptop</h1>
                 <p className="mt-5 text-xl">We offer best laptop at Affortable Prices</p>
                 <Link className="text-center mx-32 mt-10  btn btn-primary " to='/aboutus'>See More</Link>
@@ -61,7 +61,7 @@ const Banner = () => {
               <img className="w-3/4"  src="https://images.unsplash.com/photo-1501250987900-211872d97eaa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Album" />
             </figure>
             <div className="card-body">
-            <div className="my-auto mx-auto">
+            <div className="my-auto    ">
                <h1 className="text-3xl font-bold text-center">Choose Your Favourite Laptop</h1>
                 <p className="mt-5 text-xl">We offer best laptop at Affortable Prices</p>
                 <Link className="text-center mx-32 mt-10  btn btn-primary " to='/aboutus'>See More</Link>
@@ -84,7 +84,7 @@ const Banner = () => {
               <img src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Album" />
             </figure>
             <div className="card-body">
-            <div className="my-auto mx-auto">
+            <div className="my-auto    ">
                <h1 className="text-3xl font-bold text-center">Choose Your Favourite Laptop</h1>
                 <p className="mt-5 text-xl">We offer best laptop at Affortable Prices</p>
                 <Link className="text-center mx-32 mt-10  btn btn-primary " to='/aboutus'>See More</Link>

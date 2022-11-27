@@ -109,6 +109,7 @@ const AddProduct = () => {
             issold: false,
             yearuse: dhm(startDate - purchaseDate),
             issellerverified: false,
+            isAdvertized:false,
           };
 
           console.log(newProduct);
