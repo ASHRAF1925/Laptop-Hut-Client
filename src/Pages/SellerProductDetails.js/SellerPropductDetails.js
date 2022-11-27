@@ -39,6 +39,7 @@ const handleAdvertise=(product)=>{
         .then((data) => {
           console.log(data);
           refatching();
+          window.location.reload();
          
           toast.success("Successfully Added for Advertisement");
           

@@ -6,6 +6,7 @@ import Aboutus from "../../Pages/AboutUS/Aboutus";
 import AddProduct from "../../Pages/AddProduct/AddProduct";
 import AllSellers from "../../Pages/AllSellers/AllSellers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import CategoryProductDisplay from "../../Pages/Home/CategoryProductDisplay/CategoryProductDisplay";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login/Login";
 import MyOrder from "../../Pages/My Buyers/My Orders/MyOrder";
@@ -35,6 +36,14 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <Signup></Signup>,
       },
+      {
+        path:'/category/:id',
+        loader:({params})=>{
+          return fetch(`http://localhost:5000/category/${params.id}`)
+        },
+        element:<PrivateRoute><CategoryProductDisplay></CategoryProductDisplay></PrivateRoute>
+
+      }
     ],
   },
   {

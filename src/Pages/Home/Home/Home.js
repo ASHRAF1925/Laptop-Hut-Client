@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import useSeller from "../../../Hooks/useSeller";
 import Spinner from "../../Shared/Spinner/Spinner";
 import Banner from "../Banner/Banner";
 
 const Home = () => {
   const [isSeller] = useSeller();
+  const navigate=useNavigate();
   const { data: allcategoris = [], isLoading } = useQuery({
     queryKey: ["allcategoris"],
     queryFn: async () => {
@@ -28,7 +30,9 @@ const Home = () => {
       <h1>Select From the Categoris</h1>
       {allcategoris.map((category) => (
         <>
-          <h1>{category.brandName}</h1>
+          <button onClick={()=>{
+            navigate(`/category/${category.brandName}`)
+          }} className="btn btn-primary inline mx-4">{category.brandName}</button>
         </>
       ))}
 
