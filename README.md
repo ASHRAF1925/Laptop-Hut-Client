@@ -1,4 +1,6 @@
-#Laptop-Hut
+# Laptop-Hut
+## Admin : admin@laptop-hut.com
+## Password : Admin1!
 
 
 Laptop hut is a website for selling and buying used laptops

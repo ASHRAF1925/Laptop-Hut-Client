@@ -57,7 +57,7 @@ const ProductCard = ({ product }) => {
     };
     console.log(newOrder);
 
-    fetch(`http://localhost:5000/buyer/order`, {
+    fetch(`https://laptop-hut-server.vercel.app /buyer/order`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

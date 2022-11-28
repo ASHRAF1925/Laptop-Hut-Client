@@ -11,7 +11,7 @@ const ReporteItems = () => {
     queryKey: ["reportedItems"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/admin/reportedItem`,
+        `https://laptop-hut-server.vercel.app /admin/reportedItem`,
         {
           method: "GET",
           headers: {
@@ -28,7 +28,7 @@ const ReporteItems = () => {
 
   const handleDeletebuyer = (buyer) => {
     fetch(
-      `http://localhost:5000/admin/reported/delete/${buyer._id}`,
+      `https://laptop-hut-server.vercel.app /admin/reported/delete/${buyer._id}`,
       {
         method: "DELETE",
         headers: {

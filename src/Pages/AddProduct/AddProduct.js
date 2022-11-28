@@ -22,7 +22,6 @@ const AddProduct = () => {
 
   const imageHostKey = process.env.REACT_APP_imgbb_KEY;
   const navigate = useNavigate();
- 
 
   function dhm(ms) {
     const days = Math.floor(ms / (24 * 60 * 60 * 1000));
@@ -58,7 +57,7 @@ const AddProduct = () => {
   const { data: allcategoris = [], isLoading } = useQuery({
     queryKey: ["allcategoris"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allcategoris");
+      const res = await fetch("https://laptop-hut-server.vercel.app /allcategoris");
       const data = await res.json();
       return data;
     },
@@ -75,7 +74,6 @@ const AddProduct = () => {
     console.log(data);
 
     const image = data.photo[0];
-    
 
     const formData = new FormData();
     formData.append("image", image);
@@ -109,16 +107,16 @@ const AddProduct = () => {
             issold: false,
             yearuse: dhm(startDate - purchaseDate),
             issellerverified: false,
-            isAdvertized:false,
+            isAdvertized: false,
           };
 
           console.log(newProduct);
 
-          fetch(`http://localhost:5000/seller/addproduct`, {
+          fetch(`https://laptop-hut-server.vercel.app /seller/addproduct`, {
             method: "POST",
             headers: {
               "content-type": "application/json",
-              authorization: `bearer ${localStorage.getItem("accessToken")}`
+              authorization: `bearer ${localStorage.getItem("accessToken")}`,
             },
             body: JSON.stringify(newProduct),
           })
@@ -126,7 +124,7 @@ const AddProduct = () => {
             .then((data) => {
               console.log(data);
               toast.success("Successfully Added");
-              navigate('/dashboard/seller/myproducts')
+              navigate("/dashboard/seller/myproducts");
             });
         }
       });

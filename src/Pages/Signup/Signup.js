@@ -35,7 +35,7 @@ const Signup = () => {
 
   const {data,isLoading}=useQuery({
     queryKey:['user'],
-    queryFn:()=>fetch(`http://localhost:5000/user/1925ashraf@gmail.com`)
+    queryFn:()=>fetch(`https://laptop-hut-server.vercel.app /user/1925ashraf@gmail.com`)
     .then(res=>res.json())
 
   });
@@ -119,7 +119,7 @@ const Signup = () => {
 
     }
     console.log("from save post",newUser)
-    fetch(`http://localhost:5000/user?email=${email}`,{
+    fetch(`https://laptop-hut-server.vercel.app /user?email=${email}`,{
       method:"PUT",
       headers:{
         'content-type':'application/json'
@@ -136,7 +136,7 @@ const Signup = () => {
   }
 
   const getUserToken=email=>{
-    fetch(`http://localhost:5000/jwt?email=${email}`)
+    fetch(`https://laptop-hut-server.vercel.app /jwt?email=${email}`)
     .then(res=>res.json())
     .then(data=>{
       if(data.accessToken){

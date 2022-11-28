@@ -15,7 +15,7 @@ const MyProducts = () => {
   } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/seller/products`, {
+      const res = await fetch(`https://laptop-hut-server.vercel.app /seller/products`, {
         method: "GET",
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,

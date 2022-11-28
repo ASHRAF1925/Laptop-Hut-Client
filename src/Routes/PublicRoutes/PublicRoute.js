@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         loader:()=>{
-          fetch(`http://localhost:5000/advertise/products`);
+          fetch(`https://laptop-hut-server.vercel.app /advertise/products`);
         },
         element: <Home></Home>,
       },
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       {
         path:'/category/:id',
         loader:({params})=>{
-          return fetch(`http://localhost:5000/category/${params.id}`)
+          return fetch(`https://laptop-hut-server.vercel.app /category/${params.id}`)
         },
         element:<PrivateRoute><CategoryProductDisplay></CategoryProductDisplay></PrivateRoute>
 
