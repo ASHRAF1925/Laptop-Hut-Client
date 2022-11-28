@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import ErrorPage from "../../Pages/404/404Page"; 
 import AllBuyers from "../../AllBuyers/AllBuyers";
 import DashboardLayout from "../../Layouts/DashboardLayout/DashboardLayout";
 import Main from "../../Layouts/Main/Main";
@@ -18,6 +19,7 @@ import AdminRoute from "../AdminRoute/AdiminRoute";
 import PrivateRoute from "../Private Routes/PrivateRoute";
 import SellerRoute from "../SellerRoutes/SellerRoutes";
 import UserRoute from "../UserRoutes/UserRoutes";
+import Blogs from "../../Blogs/Blogs";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
         },
         element:<PrivateRoute><CategoryProductDisplay></CategoryProductDisplay></PrivateRoute>
 
+      },  {
+        path:'/aboutus',
+        element:<Aboutus></Aboutus>
+    
+      },
+      {
+        path:'/blogs',
+        element:<Blogs></Blogs>
       }
     ],
   },
@@ -90,10 +100,10 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path:'/aboutus',
-    element:<Aboutus></Aboutus>
-
+    path: "*",
+    element: <ErrorPage></ErrorPage>,
   },
+  
 ]);
 
 export default router;

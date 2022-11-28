@@ -45,23 +45,26 @@ const handleDeletebuyer=(buyer)=>{
 
     return (
         <div>
-            This is All Buyers;
-            {
-                Buyers.map(buyer=><div key={buyer._id}>
-                
-                <h1>{buyer.name}</h1>
-                <h1>{buyer.email}</h1>
-                {
-                    buyer.isverified && <div> verified</div>
-                }
-                 {
-                    !buyer.isverified && <div> not  verified</div>
-                }
-                <button onClick={()=>handleDeletebuyer(buyer)} className='btn sbtn-primary'>Delete</button>
-             
-
-                </div>)
-            }
+            
+            <div className="mx-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-8 ">
+      {Buyers.map((buyer) => (
+        <div key={ buyer._id}>
+          <div className="card w-96 bg-base-100 shadow-xl">
+            <figure>
+              <img src={ buyer.photoURL} alt="Shoes" />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title">{ buyer.name}</h2>
+  
+              <button onClick={()=>handleDeletebuyer(buyer)} className='btn sbtn-primary'>Delete</button>
+              <div className="card-actions justify-end"></div>
+            </div>
+          </div>
+        </div>
+      ))}
+          </div>
+            
+           
         </div>
     );
 };

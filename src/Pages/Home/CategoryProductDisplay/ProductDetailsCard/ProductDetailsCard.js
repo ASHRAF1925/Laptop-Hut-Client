@@ -96,7 +96,7 @@ const ProductDetailsCard = ({ product }) => {
 
   return (
     <div>
-      <h1>This is product details of {product.modelName}</h1>
+
       <div className="card w-96 bg-base-100 shadow-xl">
         <figure className="px-10 pt-10">
           <img src={image} alt="Shoes" className="rounded-xl" />

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { themeChange } from "theme-change";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
+import logo from '../../../assets/logo.png'
 
 const NavBar = () => {
   const themeValues = [
@@ -73,8 +74,17 @@ const NavBar = () => {
           >
             Login
           </NavLink>
+
+          
         )}
+         <NavLink
+          className={({ isActive }) => (isActive ? activelink : normallink)}
+          to="/blogs"
+        >
+          Blogs
+        </NavLink>
       </li>
+      
 
       <li>
         {" "}
@@ -130,7 +140,7 @@ const NavBar = () => {
             {navBarItems}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">Laptop-Hut</a>
+        <a className="btn btn-ghost normal-case text-3xl font-bold mx-5">Laptop-Hut <img className="w-20" src={logo} alt="" /></a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
