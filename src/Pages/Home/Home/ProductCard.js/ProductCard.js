@@ -51,6 +51,9 @@ const ProductCard = ({ product }) => {
       sellername: sellername,
       selleremail: selleremail,
       productId: _id,
+      productimage:image,
+      producttitle:modelName,
+      price:newPrice
     };
     console.log(newOrder);
 
@@ -101,7 +104,7 @@ const ProductCard = ({ product }) => {
 
           <div className="card-actions">
             <label className="btn btn-primary" htmlFor="my-modal-6">
-              open modal
+              Book Nows
             </label>
           </div>
         </div>
