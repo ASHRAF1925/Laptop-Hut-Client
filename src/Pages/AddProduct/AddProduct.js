@@ -57,7 +57,7 @@ const AddProduct = () => {
   const { data: allcategoris = [], isLoading } = useQuery({
     queryKey: ["allcategoris"],
     queryFn: async () => {
-      const res = await fetch("https://laptop-hut-server.vercel.app /allcategoris");
+      const res = await fetch("https://laptop-hut-server.vercel.app/allcategoris");
       const data = await res.json();
       return data;
     },
@@ -112,7 +112,7 @@ const AddProduct = () => {
 
           console.log(newProduct);
 
-          fetch(`https://laptop-hut-server.vercel.app /seller/addproduct`, {
+          fetch(`https://laptop-hut-server.vercel.app/seller/addproduct`, {
             method: "POST",
             headers: {
               "content-type": "application/json",

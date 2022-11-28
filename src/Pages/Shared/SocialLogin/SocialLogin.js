@@ -47,7 +47,7 @@ const SocialLogin = () => {
       };
 
       const getUserToken=email=>{
-        fetch(`https://laptop-hut-server.vercel.app /jwt?email=${email}`)
+        fetch(`https://laptop-hut-server.vercel.app/jwt?email=${email}`)
         .then(res=>res.json())
         .then(data=>{
           if(data.accessToken){
@@ -71,7 +71,7 @@ const SocialLogin = () => {
     
         }
         console.log("from save post",newUser)
-        fetch(`https://laptop-hut-server.vercel.app /user?email=${email}`,{
+        fetch(`https://laptop-hut-server.vercel.app/user?email=${email}`,{
           method:"PUT",
           headers:{
             'content-type':'application/json'

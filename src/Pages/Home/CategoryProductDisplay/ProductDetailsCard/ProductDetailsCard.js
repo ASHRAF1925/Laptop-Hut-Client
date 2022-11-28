@@ -59,7 +59,7 @@ const ProductDetailsCard = ({ product }) => {
     };
     console.log(newOrder);
 
-    fetch(`https://laptop-hut-server.vercel.app /buyer/order`, {
+    fetch(`https://laptop-hut-server.vercel.app/buyer/order`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -77,7 +77,7 @@ const ProductDetailsCard = ({ product }) => {
 
   const handleReportedItem=(product)=>{
     console.log(product)
-    fetch(`https://laptop-hut-server.vercel.app /admin/reportedItem`, {
+    fetch(`https://laptop-hut-server.vercel.app/admin/reportedItem`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

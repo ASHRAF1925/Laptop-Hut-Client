@@ -12,7 +12,7 @@ const AllBuyers = () => {
       } = useQuery({
         queryKey: ["Buyers"],
         queryFn: async () => {
-          const res = await fetch(`https://laptop-hut-server.vercel.app /admin/Buyers`, {
+          const res = await fetch(`https://laptop-hut-server.vercel.app/admin/Buyers`, {
             method: "GET",
             headers: {
               authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -26,7 +26,7 @@ const AllBuyers = () => {
 console.log(Buyers)
 
 const handleDeletebuyer=(buyer)=>{
-    fetch(`https://laptop-hut-server.vercel.app /admin/delete/${buyer._id}`,{
+    fetch(`https://laptop-hut-server.vercel.app/admin/delete/${buyer._id}`,{
         method:'DELETE',
         headers: {
             authorization: `bearer ${localStorage.getItem("accessToken")}`,

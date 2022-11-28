@@ -7,7 +7,7 @@ const useSeller=email=>{
     useEffect(()=>{
         if(email)
         {
-            fetch(`https://laptop-hut-server.vercel.app /users/seller/${email}`)
+            fetch(`https://laptop-hut-server.vercel.app/users/seller/${email}`)
             .then(res=>res.json())
             .then(data=>{
                 console.log(data);

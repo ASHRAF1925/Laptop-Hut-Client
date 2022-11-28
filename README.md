@@ -2,6 +2,8 @@
 ## Admin : admin@laptop-hut.com
 ## Password : Admin1!
 
+## Live Link : https://laptop-hut.web.app/
+
 
 Laptop hut is a website for selling and buying used laptops
 

@@ -17,7 +17,7 @@ const Home = () => {
   useEffect(() => {
     // api call using axios
     axios
-      .get("https://laptop-hut-server.vercel.app /advertise/products")
+      .get("https://laptop-hut-server.vercel.app/advertise/products")
       .then((res) => {
         console.log(res.data);
         setproducts(res.data);
@@ -31,7 +31,7 @@ const Home = () => {
   const { data: allcategoris = [], isLoading } = useQuery({
     queryKey: ["allcategoris"],
     queryFn: async () => {
-      const res = await fetch("https://laptop-hut-server.vercel.app /allcategoris");
+      const res = await fetch("https://laptop-hut-server.vercel.app/allcategoris");
       const data = await res.json();
       return data;
     },

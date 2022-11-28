@@ -16,7 +16,7 @@ const MyOrder = () => {
   } = useQuery({
     queryKey: ["orders"],
     queryFn: async () => {
-      const res = await fetch(`https://laptop-hut-server.vercel.app /buyer/orders`, {
+      const res = await fetch(`https://laptop-hut-server.vercel.app/buyer/orders`, {
         method: "GET",
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,

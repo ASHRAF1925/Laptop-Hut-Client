@@ -9,7 +9,7 @@ const SellerPropductDetails = ({product,refatching}) => {
 
 
 const handleDeleteProduct=(product)=>{
-    fetch(`https://laptop-hut-server.vercel.app /seller/product/${product._id}`,{
+    fetch(`https://laptop-hut-server.vercel.app/seller/product/${product._id}`,{
         method:'DELETE',
         headers: {
             authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -27,7 +27,7 @@ const handleDeleteProduct=(product)=>{
 const handleAdvertise=(product)=>{
     product.isAdvertized=true
 
-    fetch(`https://laptop-hut-server.vercel.app /seller/advertise`, {
+    fetch(`https://laptop-hut-server.vercel.app/seller/advertise`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
