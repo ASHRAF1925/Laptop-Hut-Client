@@ -10,12 +10,15 @@ const AllSellers = () => {
   } = useQuery({
     queryKey: ["sellers"],
     queryFn: async () => {
-      const res = await fetch(`https://laptop-hut-server.vercel.app/admin/sellers`, {
-        method: "GET",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
+      const res = await fetch(
+        `https://laptop-hut-server.vercel.app/admin/sellers`,
+        {
+          method: "GET",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },

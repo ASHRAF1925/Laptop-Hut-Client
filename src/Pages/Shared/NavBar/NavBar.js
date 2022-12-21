@@ -1,39 +1,15 @@
-import React, { useContext } from "react";
-import Switch from "react-switch";
-import { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { themeChange } from "theme-change";
-import { Link, NavLink } from "react-router-dom";
+import logo from "../../../assets/logo.png";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
-import logo from '../../../assets/logo.png'
 
 const NavBar = () => {
-  const themeValues = [
-    "Dark",
-    "Cupcake",
-    "Bumblebee",
-    "Emerald",
-    "Corporate",
-    "Synthwave",
-    "Retro",
-    "Cyberpunk",
-    "Valentine",
-    "Halloween",
-    "Garden",
-    "Forest",
-    "Aqua",
-    "Lofi",
-    "Pastel",
-    "Fantasy",
-    "Wireframe",
-    "Black",
-    "Luxury",
-    "Dracula",
-    "Cmyk",
-  ];
+  const themeValues = ["light", "dark"];
 
   const activelink =
     "text-xl font-bold bg-gradient-to-r from-indigo-400 via-purple-500 to-indigo-600 Text-gradient text-white rounded-3xl h-1/2  ";
-  const normallink = "text-xl my-3 font-semibold";
+  const normallink = "text-xl my-3 font-semibold text-neutral";
 
   const { user, logout } = useContext(AuthContext);
 
@@ -74,24 +50,21 @@ const NavBar = () => {
           >
             Login
           </NavLink>
-
-          
         )}
-         <NavLink
+        <NavLink
           className={({ isActive }) => (isActive ? activelink : normallink)}
           to="/blogs"
         >
           Blogs
         </NavLink>
       </li>
-      
 
       <li>
         {" "}
         {/* theme change here */}
-        <div className="font-bold bg-gradient-to-r from-indigo-400 via-purple-500 to-indigo-600 Text-gradient rounded-3xl mt-7 h-1/2">
+        <div className="font-bold bg-gradient-to-r from-indigo-400 via-purple-500 to-indigo-600  text-neutral rounded-3xl mt-7 h-1/2">
           <label className="label">
-            <span className="label-text">Select the Theme</span>
+            <span className="label-text text-neutral">Select the Theme</span>
           </label>
           <select
             data-choose-theme
@@ -140,7 +113,9 @@ const NavBar = () => {
             {navBarItems}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-3xl font-bold mx-5">Laptop-Hut <img className="w-20" src={logo} alt="" /></a>
+        <a className="btn btn-ghost normal-case text-3xl font-bold mx-5 text-neutral">
+          Laptop-Hut <img className="w-20" src={logo} alt="" />
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
@@ -152,40 +127,16 @@ const NavBar = () => {
 
       <div className="navbar-end">
         {user?.uid && (
-         <div>
-           <div className="avatar">
-            {" "}
-            <div className="w-24 rounded-full">
-              <img src={user?.photoURL} alt="" />
-            </div>{" "}
-            
-         
-           
+          <div>
+            <div className="avatar">
+              {" "}
+              <div className="w-24 rounded-full">
+                <img src={user?.photoURL} alt="" />
+              </div>{" "}
+            </div>
+            <p className="text-acceent font-bold text-xl">{user.displayName}</p>
           </div>
-          <p className="text-acceent font-bold text-xl">{user.displayName}</p>
-
-         </div>
         )}
-        <label
-          htmlFor="dashboard-drawer"
-          tabIndex={2}
-          className="btn btn-ghost lg:hidden mx-6"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h8m-8 6h16"
-            />
-          </svg>
-        </label>
       </div>
     </div>
   );

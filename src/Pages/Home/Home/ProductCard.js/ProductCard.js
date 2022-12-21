@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { useForm } from "react-hook-form";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -28,32 +27,32 @@ const ProductCard = ({ product }) => {
     yearuse,
   } = product;
   const { user } = useContext(AuthContext);
- 
-  let phone=''
-  let location=''
-  const addPhone=(event)=>{
-    phone=event.target.value;
-  }
-  const addlocation=(event)=>{
-    console.log(event.target.value)
-    location=event.target.value;
-  }
-  const navigate=useNavigate()
+
+  let phone = "";
+  let location = "";
+  const addPhone = (event) => {
+    phone = event.target.value;
+  };
+  const addlocation = (event) => {
+    console.log(event.target.value);
+    location = event.target.value;
+  };
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     toast.success("successfully added");
     console.log("helllo");
     const newOrder = {
-      buyername: user.displayName ? user.displayName : "no nmae" ,
-      buyerEmail: user.email ? user.email:"noemail",
+      buyername: user.displayName ? user.displayName : "no nmae",
+      buyerEmail: user.email ? user.email : "noemail",
       buyerPhone: phone,
       deliveryLocation: location,
       sellername: sellername,
       selleremail: selleremail,
       productId: _id,
-      productimage:image,
-      producttitle:modelName,
-      price:newPrice
+      productimage: image,
+      producttitle: modelName,
+      price: newPrice,
     };
     console.log(newOrder);
 
@@ -61,7 +60,7 @@ const ProductCard = ({ product }) => {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("accessToken")}`
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(newOrder),
     })
@@ -69,17 +68,13 @@ const ProductCard = ({ product }) => {
       .then((data) => {
         console.log(data);
         toast.success("Successfully Added");
-        navigate('/')
+        navigate("/");
       });
- 
-    
   };
-
-
 
   return (
     <div>
-      <div className="card w-96 bg-base-100 shadow-xl">
+      <div className="card  h-full bg-base-100 shadow-xl bg-secondary mx-2 text-neutral">
         <figure className="px-10 pt-10">
           <img src={image} alt="Shoes" className="rounded-xl" />
         </figure>
@@ -103,7 +98,7 @@ const ProductCard = ({ product }) => {
           <h3 className="text-xl">Added on: {addedDate}</h3>
 
           <div className="card-actions">
-            <label className="btn btn-primary" htmlFor="my-modal-6">
+            <label className="btn btn-neutral" htmlFor="my-modal-6">
               Book Nows
             </label>
           </div>
@@ -211,7 +206,7 @@ const ProductCard = ({ product }) => {
       <input type="checkbox" id="my-modal-6" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <form >
+          <form>
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text">Buyer Name</span>
@@ -270,8 +265,8 @@ const ProductCard = ({ product }) => {
                 <span className="label-text">Buyer Phone Number</span>
               </label>
               <input
-              required
-              onBlur={ addPhone}
+                required
+                onBlur={addPhone}
                 type="text"
                 placeholder="Phone Number"
                 name="phone"
@@ -284,24 +279,23 @@ const ProductCard = ({ product }) => {
                 <span className="label-text">Delivery Location</span>
               </label>
               <input
-              required
-              onBlur={addlocation}
+                required
+                onBlur={addlocation}
                 type="text"
                 placeholder="Location"
                 name="location"
                 className="input input-bordered w-full max-w-xs"
               />
             </div>
-            
-           <label type="submit" htmlFor="my-modal-6"  
-                onClick={handleSubmit} className="btn btn-primary w-full mt-10 ">   
-                
-               Book Now
-                
-               
+
+            <label
+              type="submit"
+              htmlFor="my-modal-6"
+              onClick={handleSubmit}
+              className="btn btn-primary w-full mt-10 "
+            >
+              Book Now
             </label>
-          
-        
           </form>
         </div>
       </div>

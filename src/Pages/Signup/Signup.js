@@ -1,15 +1,13 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { useForm } from "react-hook-form";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 
+import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
-import { useQuery } from "@tanstack/react-query";
-
-
 
 const Signup = () => {
   const {
@@ -22,7 +20,8 @@ const Signup = () => {
     mode: "onTouched",
   });
 
-  const { createUseremail, updateuserInfo,userInfo,SetUserInfo} = useContext(AuthContext);
+  const { createUseremail, updateuserInfo, userInfo, SetUserInfo } =
+    useContext(AuthContext);
 
   const [passwordEye, setPasswordEye] = useState(false);
   const [signupError, setsignupError] = useState("");
@@ -30,14 +29,14 @@ const Signup = () => {
 
   const password = watch("password");
   const imageHostKey = process.env.REACT_APP_imgbb_KEY;
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-
-  const {data,isLoading}=useQuery({
-    queryKey:['user'],
-    queryFn:()=>fetch(`https://laptop-hut-server.vercel.app/user/1925ashraf@gmail.com`)
-    .then(res=>res.json())
-
+  const { data, isLoading } = useQuery({
+    queryKey: ["user"],
+    queryFn: () =>
+      fetch(
+        `https://laptop-hut-server.vercel.app/user/1925ashraf@gmail.com`
+      ).then((res) => res.json()),
   });
 
   const handlePasswordClick = () => {
@@ -50,16 +49,13 @@ const Signup = () => {
 
   // function for handling email password signup
   const handleSignup = (data) => {
-
-
     setsignupError("");
-
 
     const image = data.photo[0];
 
     const formData = new FormData();
     formData.append("image", image);
- 
+
     const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
     fetch(url, {
       method: "POST",
@@ -77,7 +73,13 @@ const Signup = () => {
               const user = result.user;
 
               handleupdateProfile(data.name, imgData.data.url);
-              saveUser(data.name,data.email,imgData.data.url,data.role,false);
+              saveUser(
+                data.name,
+                data.email,
+                imgData.data.url,
+                data.role,
+                false
+              );
               toast("User Created Succesfully");
 
               console.log(user);
@@ -87,11 +89,10 @@ const Signup = () => {
               toast.error("what a msitak");
               console.log(error);
             });
-          
         }
       });
 
-// function for updating user information
+    // function for updating user information
     const handleupdateProfile = (name, photourl) => {
       console.log(photourl);
       const profile = {
@@ -102,7 +103,6 @@ const Signup = () => {
       updateuserInfo(profile)
         .then(() => {
           console.log("updated");
-          
         })
         .catch((error) => {
           console.log("update error", error);
@@ -112,51 +112,42 @@ const Signup = () => {
 
   // function for inserting user in database
 
-  const saveUser=(name,email,photoURL,role,isverified)=>{
-
-    const newUser={
-      name,email,photoURL,role,isverified
-
-    }
-    console.log("from save post",newUser)
-    fetch(`https://laptop-hut-server.vercel.app/user?email=${email}`,{
-      method:"PUT",
-      headers:{
-        'content-type':'application/json'
+  const saveUser = (name, email, photoURL, role, isverified) => {
+    const newUser = {
+      name,
+      email,
+      photoURL,
+      role,
+      isverified,
+    };
+    console.log("from save post", newUser);
+    fetch(`https://laptop-hut-server.vercel.app/user?email=${email}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
       },
-      body:JSON.stringify(newUser)
+      body: JSON.stringify(newUser),
     })
-    .then(res=>res.json())
-    .then(data=>{
-      console.log(data);
-      getUserToken(email)
-      
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        getUserToken(email);
+      });
+  };
 
-  }
-
-  const getUserToken=email=>{
+  const getUserToken = (email) => {
     fetch(`https://laptop-hut-server.vercel.app/jwt?email=${email}`)
-    .then(res=>res.json())
-    .then(data=>{
-      if(data.accessToken){
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.accessToken) {
+          localStorage.setItem("accessToken", data.accessToken);
 
-        localStorage.setItem('accessToken',data.accessToken);
+          toast.success("Sign Up Successful!");
 
-        toast.success("Sign Up Successful!")
-
-
-
-        navigate('/');
-
-      }
-    })
-  }
-
-
-
-  
-
+          navigate("/");
+        }
+      });
+  };
 
   return (
     <div className=" flex justify-center items-center container mx-auto  ">

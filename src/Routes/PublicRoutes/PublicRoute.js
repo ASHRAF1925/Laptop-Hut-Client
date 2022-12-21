@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import ErrorPage from "../../Pages/404/404Page"; 
 import AllBuyers from "../../AllBuyers/AllBuyers";
+import Blogs from "../../Blogs/Blogs";
 import DashboardLayout from "../../Layouts/DashboardLayout/DashboardLayout";
 import Main from "../../Layouts/Main/Main";
+import ErrorPage from "../../Pages/404/404Page";
 import Aboutus from "../../Pages/AboutUS/Aboutus";
 import AddProduct from "../../Pages/AddProduct/AddProduct";
 import AllSellers from "../../Pages/AllSellers/AllSellers";
@@ -19,7 +20,6 @@ import AdminRoute from "../AdminRoute/AdiminRoute";
 import PrivateRoute from "../Private Routes/PrivateRoute";
 import SellerRoute from "../SellerRoutes/SellerRoutes";
 import UserRoute from "../UserRoutes/UserRoutes";
-import Blogs from "../../Blogs/Blogs";
 
 const router = createBrowserRouter([
   {
@@ -28,8 +28,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        loader:()=>{
-          fetch(`https://laptop-hut-server.vercel.app/advertise/products`);
+        loader: () => {
+          fetch(`https://laptop-hut-server.vercel.app/postforSale/products`);
         },
         element: <Home></Home>,
       },
@@ -42,21 +42,26 @@ const router = createBrowserRouter([
         element: <Signup></Signup>,
       },
       {
-        path:'/category/:id',
-        loader:({params})=>{
-          return fetch(`https://laptop-hut-server.vercel.app/category/${params.id}`)
+        path: "/category/:id",
+        loader: ({ params }) => {
+          return fetch(
+            `https://laptop-hut-server.vercel.app/category/${params.id}`
+          );
         },
-        element:<PrivateRoute><CategoryProductDisplay></CategoryProductDisplay></PrivateRoute>
-
-      },  {
-        path:'/aboutus',
-        element:<Aboutus></Aboutus>
-    
+        element: (
+          <PrivateRoute>
+            <CategoryProductDisplay></CategoryProductDisplay>
+          </PrivateRoute>
+        ),
       },
       {
-        path:'/blogs',
-        element:<Blogs></Blogs>
-      }
+        path: "/aboutus",
+        element: <Aboutus></Aboutus>,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs></Blogs>,
+      },
     ],
   },
   {
@@ -71,39 +76,68 @@ const router = createBrowserRouter([
 
       {
         path: "/dashboard/admin/allsellers",
-        element: <AdminRoute><AllSellers></AllSellers></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AllSellers></AllSellers>
+          </AdminRoute>
+        ),
       },
       {
-        path:'/dashboard/seller/addProducts',
-        element:<SellerRoute> <AddProduct></AddProduct> </SellerRoute>
+        path: "/dashboard/seller/addProducts",
+        element: (
+          <SellerRoute>
+            {" "}
+            <AddProduct></AddProduct>{" "}
+          </SellerRoute>
+        ),
       },
       {
-        path:'/dashboard/seller/myproducts',
-        element:<SellerRoute> <MyProducts></MyProducts></SellerRoute>
+        path: "/dashboard/seller/myproducts",
+        element: (
+          <SellerRoute>
+            {" "}
+            <MyProducts></MyProducts>
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/admin/allbuyers",
-        element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AllBuyers></AllBuyers>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/admin/reportedItems",
-        element: <AdminRoute><ReporteItems></ReporteItems></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <ReporteItems></ReporteItems>
+          </AdminRoute>
+        ),
       },
       {
-        path:"/dashboard/seller/mybuyers",
-        element:<SellerRoute><MyBuyers></MyBuyers></SellerRoute>
+        path: "/dashboard/seller/mybuyers",
+        element: (
+          <SellerRoute>
+            <MyBuyers></MyBuyers>
+          </SellerRoute>
+        ),
       },
       {
-        path:"/dashboard/User/myorders",
-        element:<UserRoute><MyOrder></MyOrder></UserRoute>
-      }
+        path: "/dashboard/User/myorders",
+        element: (
+          <UserRoute>
+            <MyOrder></MyOrder>
+          </UserRoute>
+        ),
+      },
     ],
   },
   {
     path: "*",
     element: <ErrorPage></ErrorPage>,
   },
-  
 ]);
 
 export default router;

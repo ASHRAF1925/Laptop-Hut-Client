@@ -1,14 +1,13 @@
-import React, { useContext } from "react";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
-import toast from "react-hot-toast";
 
 const Login = () => {
-  const { signIn,userInfo,SetUserInfo } = useContext(AuthContext);
+  const { signIn, userInfo, SetUserInfo } = useContext(AuthContext);
   const {
     register,
     formState: { errors },
@@ -16,33 +15,29 @@ const Login = () => {
     watch,
   } = useForm();
 
-  const location=useLocation();
-  const navigate=useNavigate();
-  const from=location.state?.from?.pathname || '/';
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
-  const [loginError,setloginError]=useState('');
+  const [loginError, setloginError] = useState("");
 
   const handleLogin = (data) => {
-    setloginError('')
+    setloginError("");
 
     console.log(data);
-    signIn(data.email,data.password)
-    .then(result=>{
-        const user=result.user;
+    signIn(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
         console.log(user);
-        getUserToken(data.email)
-        
-        navigate(from,{replace:true})
-    })
-    .catch(error=>{
+        getUserToken(data.email);
+
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
         console.log(error);
-        setloginError(error.message)
-
-    })
+        setloginError(error.message);
+      });
   };
-
-
-
 
   const [passwordEye, setPasswordEye] = useState(false);
 
@@ -50,28 +45,22 @@ const Login = () => {
     setPasswordEye(!passwordEye);
   };
 
-// password=Aa1!sd
-//email :test@gmail.com
+  // password=Aa1!sd
+  //email :test@gmail.com
 
-const getUserToken=email=>{
-  fetch(`https://laptop-hut-server.vercel.app/jwt?email=${email}`)
-  .then(res=>res.json())
-  .then(data=>{
-    if(data.accessToken){
+  const getUserToken = (email) => {
+    fetch(`https://laptop-hut-server.vercel.app/jwt?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.accessToken) {
+          localStorage.setItem("accessToken", data.accessToken);
 
-      localStorage.setItem('accessToken',data.accessToken);
+          toast.success("Login Successful");
 
-      toast.success("Login Successful");
-
-
-      navigate('/');
-
-    }
-  })
-}
-
-
- 
+          navigate("/");
+        }
+      });
+  };
 
   return (
     <div className=" h-[500px] flex justify-center items-center container mx-auto  ">
@@ -141,7 +130,6 @@ const getUserToken=email=>{
             </div>
           </div>
 
-       
           <input
             className="btn btn-primary w-full "
             type="submit"

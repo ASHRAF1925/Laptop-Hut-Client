@@ -1,15 +1,15 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 
-import Spinner from "../Shared/Spinner/Spinner";
 import { useQuery } from "@tanstack/react-query";
+import Spinner from "../Shared/Spinner/Spinner";
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
@@ -57,7 +57,9 @@ const AddProduct = () => {
   const { data: allcategoris = [], isLoading } = useQuery({
     queryKey: ["allcategoris"],
     queryFn: async () => {
-      const res = await fetch("https://laptop-hut-server.vercel.app/allcategoris");
+      const res = await fetch(
+        "https://laptop-hut-server.vercel.app/allcategoris"
+      );
       const data = await res.json();
       return data;
     },

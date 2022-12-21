@@ -1,7 +1,4 @@
-import React, { Component } from "react";
-import Slider from "react-slick";
-import useWindowDimensions from "../../../Hooks/useWindow";
-import { motion } from "framer-motion";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Banner = () => {
@@ -11,16 +8,26 @@ const Banner = () => {
         <div id="slide1" className="carousel-item relative w-full">
           <div className="card lg:card-side bg-base-100 shadow-xl w-full">
             <figure>
-              <img className="w-3/4" src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" />
+              <img
+                className="w-3/4"
+                src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              />
             </figure>
             <div className="card-body">
-            <div className="my-auto    ">
-               <h1 className="text-3xl font-bold text-center">Choose Your Favourite Laptop</h1>
-                <p className="mt-5 text-xl">We offer best laptop at Affortable Prices</p>
-                <Link className="text-center mx-32 mt-10  btn btn-primary " to='/aboutus'>See More</Link>
-               </div>
-              
-            
+              <div className="my-auto me-5    ">
+                <h1 className="text-3xl font-bold  ">
+                  Choose Your Favourite Laptop-4
+                </h1>
+                <p className="mt-5 text-xl  ">
+                  We offer best laptop at Affortable Prices
+                </p>
+                <Link
+                  className="  mx-auto mt-10  btn btn-primary "
+                  to="/aboutus"
+                >
+                  See More
+                </Link>
+              </div>
             </div>
           </div>
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -35,15 +42,27 @@ const Banner = () => {
         <div id="slide2" className="carousel-item relative w-full">
           <div className="card lg:card-side bg-base-100 shadow-xl w-full">
             <figure>
-              <img className="w-3/4"  src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" alt="Album" />
+              <img
+                className="w-3/4"
+                src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80"
+                alt="Album"
+              />
             </figure>
             <div className="card-body">
-            <div className="my-auto    ">
-               <h1 className="text-3xl font-bold text-center">Choose Your Favourite Laptop</h1>
-                <p className="mt-5 text-xl">We offer best laptop at Affortable Prices</p>
-                <Link className="text-center mx-32 mt-10  btn btn-primary " to='/aboutus'>See More</Link>
-               </div>
-            
+              <div className="my-auto me-5    ">
+                <h1 className="text-3xl font-bold  ">
+                  Choose Your Favourite Laptop-4
+                </h1>
+                <p className="mt-5 text-xl  ">
+                  We offer best laptop at Affortable Prices
+                </p>
+                <Link
+                  className="  mx-auto mt-10  btn btn-primary "
+                  to="/aboutus"
+                >
+                  See More
+                </Link>
+              </div>
             </div>
           </div>
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -58,15 +77,27 @@ const Banner = () => {
         <div id="slide3" className="carousel-item relative w-full">
           <div className="card lg:card-side bg-base-100 shadow-xl w-full">
             <figure>
-              <img className="w-3/4"  src="https://images.unsplash.com/photo-1501250987900-211872d97eaa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Album" />
+              <img
+                className="w-3/4"
+                src="https://images.unsplash.com/photo-1501250987900-211872d97eaa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                alt="Album"
+              />
             </figure>
             <div className="card-body">
-            <div className="my-auto    ">
-               <h1 className="text-3xl font-bold text-center">Choose Your Favourite Laptop</h1>
-                <p className="mt-5 text-xl">We offer best laptop at Affortable Prices</p>
-                <Link className="text-center mx-32 mt-10  btn btn-primary " to='/aboutus'>See More</Link>
-               </div>
-            
+              <div className="my-auto me-5    ">
+                <h1 className="text-3xl font-bold  ">
+                  Choose Your Favourite Laptop-4
+                </h1>
+                <p className="mt-5 text-xl  ">
+                  We offer best laptop at Affortable Prices
+                </p>
+                <Link
+                  className="  mx-auto mt-10  btn btn-primary "
+                  to="/aboutus"
+                >
+                  See More
+                </Link>
+              </div>
             </div>
           </div>
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -81,15 +112,26 @@ const Banner = () => {
         <div id="slide4" className="carousel-item relative w-full">
           <div className="card lg:card-side bg-base-100 shadow-xl w-full">
             <figure>
-              <img src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Album" />
+              <img
+                src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+                alt="Album"
+              />
             </figure>
             <div className="card-body">
-            <div className="my-auto    ">
-               <h1 className="text-3xl font-bold text-center">Choose Your Favourite Laptop</h1>
-                <p className="mt-5 text-xl">We offer best laptop at Affortable Prices</p>
-                <Link className="text-center mx-32 mt-10  btn btn-primary " to='/aboutus'>See More</Link>
-               </div>
-            
+              <div className="my-auto me-5">
+                <h1 className="text-3xl font-bold  ">
+                  Choose Your Favourite Laptop-6
+                </h1>
+                <p className="mt-5 text-xl  ">
+                  We offer best laptop at Affortable Prices
+                </p>
+                <Link
+                  className="  mx-auto mt-10  btn btn-primary "
+                  to="/aboutus"
+                >
+                  See More
+                </Link>
+              </div>
             </div>
           </div>
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">

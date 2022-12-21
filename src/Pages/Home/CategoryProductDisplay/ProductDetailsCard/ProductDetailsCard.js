@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BsFillPatchCheckFill } from "react-icons/bs";
-import { useContext } from "react";
-import { useForm } from "react-hook-form";
 
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -75,8 +73,8 @@ const ProductDetailsCard = ({ product }) => {
       });
   };
 
-  const handleReportedItem=(product)=>{
-    console.log(product)
+  const handleReportedItem = (product) => {
+    console.log(product);
     fetch(`https://laptop-hut-server.vercel.app/admin/reportedItem`, {
       method: "POST",
       headers: {
@@ -92,12 +90,10 @@ const ProductDetailsCard = ({ product }) => {
         navigate("/");
       });
   };
-  
 
   return (
     <div>
-
-      <div className="card w-96 bg-base-100 shadow-xl">
+      <div className="card  h-full bg-base-100 shadow-xl bg-secondary mx-2 text-neutral">
         <figure className="px-10 pt-10">
           <img src={image} alt="Shoes" className="rounded-xl" />
         </figure>
@@ -121,7 +117,12 @@ const ProductDetailsCard = ({ product }) => {
           <h3 className="text-xl">Added on: {addedDate}</h3>
 
           <div className="card-actions">
-            <button onClick={()=>handleReportedItem(product) } className="btn btn-danger">Report Item</button>
+            <button
+              onClick={() => handleReportedItem(product)}
+              className="btn btn-danger"
+            >
+              Report Item
+            </button>
             <label className="btn btn-primary" htmlFor="my-modal-6">
               Book Now
             </label>
